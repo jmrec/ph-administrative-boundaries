@@ -113,5 +113,28 @@ cors:
 Philippine administrative boundaries from the [Humanitarian Data Exchange (HDX)](https://data.humdata.org/) —
 [COD Administrative Boundaries for the Philippines](https://data.humdata.org/dataset/cod-ab-phl), contributed by [OCHA Philippines](https://data.humdata.org/organization/ocha-philippines).
 
+### Processing
+
+Shapefiles were simplified with [mapshaper](https://github.com/mbloch/mapshaper) using **Visvalingam / weighted area at 20%** and **0.00001 precision**, then converted to PMTiles via [tippecanoe](https://github.com/felt/tippecanoe):
+
+```bash
+tippecanoe -o <destination>.pmtiles \
+  -zg \
+  -P \
+  --simplify-only-low-zooms \
+  --detect-shared-borders \
+  --drop-densest-as-needed \
+  --layer=<layer-name> \
+  <source>.geojson
+```
+
+| Flag | Purpose |
+|-------|-------|
+| `-zg` | Auto-guess max zoom from input data |
+| `-P` | Parallel processing |
+| `--simplify-only-low-zooms` | Only simplify at lower zoom levels |
+| `--detect-shared-borders` | Merge coincident border lines to reduce tile size |
+| `--drop-densest-as-needed` | Drop the densest features to keep tiles under size limits |
+
 ## License
 This project is licensed under the MIT License — see [LICENSE](/LICENSE) for details.
