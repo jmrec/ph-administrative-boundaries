@@ -1,0 +1,26 @@
+listen_addresses: "0.0.0.0:3080"
+worker_processes: 8
+cache_size_mb: 512
+
+pmtiles:
+  sources:
+    barangays:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_barangays.pmtiles
+      type: mvt
+      convert_to_mlt: auto
+    cities-municipalities:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_cities.pmtiles
+      type: mvt
+      convert_to_mlt: auto
+    provinces:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_provinces.pmtiles
+      type: mvt
+      convert_to_mlt: auto
+    regions:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_regions.pmtiles
+      type: mvt
+      convert_to_mlt: auto
+    country:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_country.pmtiles
+      type: mvt
+      convert_to_mlt: auto

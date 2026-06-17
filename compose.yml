@@ -1,0 +1,14 @@
+services:
+  martin:
+    image: ghcr.io/maplibre/martin:1.10.1
+    container_name: martin
+
+    # Pass the following flag to enable the web UI
+    # command: ["--webui", "enable-for-all", "--config", "/config/config.yml"]
+    
+    command: ["--config", "/config/config.yml"]
+    ports:
+      - "3080:3080"
+    volumes:
+      - ./data:/data:ro
+      - ./config:/config:ro
