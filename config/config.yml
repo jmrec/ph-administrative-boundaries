@@ -4,6 +4,10 @@ cache_size_mb: 512
 
 pmtiles:
   sources:
+    benguet:
+      path: https://assets.jmrecondo.com/ph-administrative-boundaries/benguet.pmtiles
+      type: mvt
+      convert_to_mlt: auto
     barangays:
       path: https://assets.jmrecondo.com/ph-administrative-boundaries/ph_barangays.pmtiles
       type: mvt
