@@ -6,7 +6,7 @@ services:
     # Pass the following flag to enable the web UI
     # command: ["--webui", "enable-for-all", "--config", "/config/config.yml"]
     
-    command: ["--config", "/config/config.yml"]
+    command: ${MARTIN_EXTRA_ARGS:---config /config/config.yml}
     ports:
       - "3080:3080"
     volumes:
