@@ -1,0 +1,47 @@
+{
+  "name": "ph-administrative-boundaries",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "username": "node"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/jungaretti/features/vim:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": false
+    }
+  },
+  "remoteEnv": {
+    "MARTIN_PORT": "3090",
+    "MARTIN_CONTAINER_NAME": "martin-dev",
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "remoteUser": "node",
+  "postStartCommand": "sudo chmod 666 /var/run/docker-host.sock",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph",
+        "oderwat.indent-rainbow",
+        "redhat.vscode-yaml",
+        "nefrob.vscode-just-syntax"
+      ]
+    }
+  },
+  "mounts": [
+    "source=/opt/containers/ph-boundaries/data,target=${containerWorkspaceFolder}/data,type=bind,consistency=cached"
+  ],
+  "forwardPorts": [3090],
+  "portsAttributes": {
+    "3090": {
+      "label": "Martin Tile Server",
+      "onAutoForward": "notify"
+    }
+  }
+}

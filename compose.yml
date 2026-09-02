@@ -1,14 +1,19 @@
 services:
   martin:
-    image: ghcr.io/maplibre/martin:1.10.1
-    container_name: martin
+    image: ghcr.io/maplibre/martin:1.15.0
+    container_name: "${MARTIN_CONTAINER_NAME:-martin}"
 
     # Pass the following flag to enable the web UI
     # command: ["--webui", "enable-for-all", "--config", "/config/config.yml"]
     
-    command: ${MARTIN_EXTRA_ARGS:---config /config/config.yml}
+    command: ["--webui", "enable-for-all", "--config", "/config/config.yml"]
     ports:
-      - "3080:3080"
+      - "${MARTIN_PORT:-3080}:3080"
     volumes:
-      - ./data:/data:ro
-      - ./config:/config:ro
+      - "${LOCAL_WORKSPACE_FOLDER:-.}/data:/data:ro"
+      - "${LOCAL_WORKSPACE_FOLDER:-.}/config:/config:ro"
+    labels:
+      - "docktail.service.enable=true"
+      - "docktail.service.name=${MARTIN_CONTAINER_NAME:-martin}"
+      - "docktail.service.port=3080"
+      - "docktail.service.service-port=443"
