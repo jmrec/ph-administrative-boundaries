@@ -3,6 +3,9 @@ name: Deploy to VPS
 on:
   push:
     branches: [main]
+    includes:
+      - 'config/**'
+      - 'compose.yml'
   workflow_dispatch:
 
 jobs:
